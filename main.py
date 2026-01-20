@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Auto deploy works 🎯"}
+    return {"message": "App runner is working 🎯"}
 
 if __name__ == "__main__":
     uvicorn.run(
