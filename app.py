@@ -3,8 +3,12 @@ from fastapi import FastAPI
 app = FastAPI()
 
 @app.get("/")
-def read_root():
-    return {"message": "App Runner POC is working!"}
+def root():
+    return {
+        "status": "ok",
+        "message": "FastAPI running on AWS App Runner (no Docker) 🚀"
+    }
 
-
-
+@app.get("/ping")
+def ping():
+    return "pong"
