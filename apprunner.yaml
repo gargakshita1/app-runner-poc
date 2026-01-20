@@ -5,12 +5,16 @@ build:
   commands:
     build:
       - python3 -m pip install --upgrade pip
-      - python3 -m pip install -r requirements.txt --target /usr/local/python-packages
+      - python3 -m pip install -r requirements.txt -t /app/.python_packages
 
 run:
+  env:
+    - name: PYTHONPATH
+      value: /app/.python_packages
   command: python3 -m uvicorn main:app --host 0.0.0.0 --port 8080
   network:
     port: 8080
+
 
 
 
