@@ -4,11 +4,4 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {
-        "status": "ok",
-        "message": "FastAPI running on AWS App Runner (no Docker) 🚀"
-    }
-
-@app.get("/ping")
-def ping():
-    return "pong"
+    return {"message": "App Runner is working"}
