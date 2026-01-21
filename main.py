@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Request, HTTPException
+import base64
+import json
 import uvicorn
 
 app = FastAPI()
@@ -8,7 +10,14 @@ def root():
     return {"message": "App runner is working 🎯"}
 
 def get_groups(request: Request):
-    claims = request.scope["aws.event"]["requestContext"]["authorizer"]["jwt"]["claims"]
+    oidc_data = request.headers.get("x-amzn-oidc-data")
+    if not oidc_data:
+        raise HTTPException(status_code=401, detail="Missing token data")
+
+    payload = oidc_data.split(".")[1]
+    payload += "=" * (-len(payload) % 4)  # pad base64
+    claims = json.loads(base64.b64decode(payload))
+
     return claims.get("cognito:groups", [])
 
 @app.get("/admin")
