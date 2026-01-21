@@ -11,9 +11,9 @@ run:
   env:
     - name: PYTHONPATH
       value: /app/.python_packages
-  command: python3 -m uvicorn main:app --host 0.0.0.0 --port 8080
+  command: python3 -m uvicorn main:app --host 0.0.0.0 --port 8000
   network:
-    port: 8080
+    port: 8000
 
 
 
